@@ -1,0 +1,36 @@
+{
+  "name": "cheerio-advanced-selectors",
+  "version": "0.0.0",
+  "description": "Add advanced selector support to cheerio",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson/cheerio-advanced-selectors.git"
+  },
+  "devDependencies": {
+    "cheerio": "^0.19.0",
+    "standard": "^4.4.1",
+    "tape": "^4.0.0"
+  },
+  "keywords": [
+    "cheerio",
+    "jquery",
+    "query",
+    "queries",
+    "selector",
+    "selectors",
+    "find",
+    "last",
+    "first",
+    "eq"
+  ],
+  "author": "Thomas Watson Steen <w@tson.dk> (https://twitter.com/wa7son)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watson/cheerio-advanced-selectors/issues"
+  },
+  "homepage": "https://github.com/watson/cheerio-advanced-selectors"
+}
