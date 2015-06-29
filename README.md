@@ -39,7 +39,8 @@ $('div:first').text() // => 'foo'
 ```
 
 Note that this will only work if the HTML is loaded using the `.load()`
-function as seen above.
+function as seen above (see [issue
+1](https://github.com/watson/cheerio-advanced-selectors/issues/1)).
 
 Alternatively use the `.find()` function to only use
 cheerio-advanced-selectors for a specific selector:
