@@ -1,6 +1,13 @@
 # cheerio-advanced-selectors
 
-Add advanced selector support to cheerio
+Add support for the following selectors to
+[cheerio](https://github.com/cheeriojs/cheerio):
+
+- `:first`
+- `:last`
+- `:eq(index)`
+
+More selectors can easily be added: Just [open an issue](https://github.com/watson/cheerio-advanced-selectors/issues) and I'll look into it :)
 
 [![Build status](https://travis-ci.org/watson/cheerio-advanced-selectors.svg?branch=master)](https://travis-ci.org/watson/cheerio-advanced-selectors)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
@@ -62,6 +69,35 @@ var html2 = cheerio.load('<div><span><h1>foo2</h1></span><span><h1>bar2</h1></sp
 myH1(html1).text() // => 'bar1'
 myH1(html2).text() // => 'bar2'
 ```
+
+## What's the problem?
+
+Cheerio sacrifices advanced CSS selector support for speed. This means
+for instance that the `:eq()` selector isn't supported. The work-around
+is normally to use the `.eq()` function instead:
+
+```js
+// this will not work:
+$('div:eq(1)');
+
+// use this instead:
+$('div').eq(1);
+```
+
+This is a good alternative if you write the CSS selectors from scrach,
+but what if you are working with selectors that already contain `:eq()`?
+**Don't fear, cheerio-advanced-selectors is here :)**
+
+## Solution
+
+The solution to the problem is to automatically parse the selector
+string at run-time. So if you give cheerio-advanced-selectors a selector
+like `div:eq(1)` it will return the following cheerio cursor:
+`$('div').eq(1)`.
+
+It also works for complex selectors, so that `div:eq(1) h2:first span`
+will be converted and interpreted as
+`$('div').eq(1).find('h2').first().find('span')`.
 
 ## Supported advanced selectors
 
