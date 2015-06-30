@@ -8,8 +8,8 @@ exports.wrap = function (cheerio) {
   cheerio.load = function () {
     var $ = load.apply(cheerio, arguments)
     return function (selector, context, root) {
-      if (typeof selector === 'object') return $.apply(cheerio, arguments)
-      else return exports.find($, selector, context, root)
+      if (typeof selector === 'string') return exports.find($, selector, context, root)
+      return $.apply(cheerio, arguments)
     }
   }
 
