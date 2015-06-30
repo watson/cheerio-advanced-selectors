@@ -21,44 +21,56 @@ exports.find = function ($, selector, context, root) {
 }
 
 exports.compile = function (selector) {
+  var steps = split(selector)
+  selector = steps.shift()
+
+  return function ($, context, root) {
+    var cursor = $(selector, context, root)
+    return execSteps(cursor, steps)
+  }
+}
+
+var split = function (selector) {
   var steps = []
   var match = selector.match(splitter)
 
   while (match) {
     steps.push(match[1])
-    steps.push(exports['_' + match[2]](match[3]))
+    steps.push(selectors[match[2]](match[3]))
     selector = match[4].trim()
     match = selector.match(splitter)
   }
-  steps.push(selector)
-  selector = steps.shift()
 
-  steps = steps.filter(function (step) {
+  steps.push(selector)
+
+  return steps.filter(function (step) {
     return step !== ''
   })
-
-  return function ($, context, root) {
-    return steps.reduce(function (cursor, step) {
-      return typeof step === 'function' ? step(cursor) : cursor.find(step)
-    }, $(selector, context, root))
-  }
 }
 
-exports._eq = function (index) {
-  index = parseInt(index, 10)
-  return function (cursor) {
-    return cursor.eq(index)
-  }
+var execSteps = function (cursor, steps) {
+  return steps.reduce(function (cursor, step) {
+    return typeof step === 'function' ? step(cursor) : cursor.find(step)
+  }, cursor)
 }
 
-exports._first = function () {
-  return function (cursor) {
-    return cursor.first()
-  }
-}
+var selectors = {
+  eq: function (index) {
+    index = parseInt(index, 10)
+    return function (cursor) {
+      return cursor.eq(index)
+    }
+  },
 
-exports._last = function () {
-  return function (cursor) {
-    return cursor.last()
+  first: function () {
+    return function (cursor) {
+      return cursor.first()
+    }
+  },
+
+  last: function () {
+    return function (cursor) {
+      return cursor.last()
+    }
   }
 }
