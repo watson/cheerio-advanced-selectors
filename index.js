@@ -21,25 +21,25 @@ exports.find = function ($, selector, context, root) {
 }
 
 exports.compile = function (selector) {
-  var parts = []
+  var steps = []
   var match = selector.match(splitter)
 
   while (match) {
-    parts.push(match[1])
-    parts.push(exports['_' + match[2]](match[3]))
+    steps.push(match[1])
+    steps.push(exports['_' + match[2]](match[3]))
     selector = match[4].trim()
     match = selector.match(splitter)
   }
-  parts.push(selector)
-  selector = parts.shift()
+  steps.push(selector)
+  selector = steps.shift()
 
-  parts = parts.filter(function (part) {
-    return part !== ''
+  steps = steps.filter(function (step) {
+    return step !== ''
   })
 
   return function ($, context, root) {
-    return parts.reduce(function (cursor, part) {
-      return typeof part === 'function' ? part(cursor) : cursor.find(part)
+    return steps.reduce(function (cursor, step) {
+      return typeof step === 'function' ? step(cursor) : cursor.find(step)
     }, $(selector, context, root))
   }
 }
