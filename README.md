@@ -91,7 +91,7 @@ This is a good alternative if you write the CSS selectors from scrach,
 but what if you are working with selectors that already contain `:eq()`?
 **Don't fear, cheerio-advanced-selectors is here :)**
 
-## Solution
+### Solution
 
 The solution to the problem is to automatically parse the selector
 string at run-time. So if you give cheerio-advanced-selectors a selector
