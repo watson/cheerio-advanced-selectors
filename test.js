@@ -104,4 +104,19 @@ test('#wrap()', function (t) {
       t.end()
     })
   })
+
+  t.test('this as selector', function (t) {
+    t.plan(2)
+
+    var load = cheerio.load
+    var wrapped = cheerioAdv.wrap(cheerio)
+    var $ = wrapped.load('<div>foo</div><div>bar</div>')
+    var results = ['foo', 'bar']
+
+    $('div').each(function () {
+      t.equal($(this).text(), results.shift())
+    })
+
+    cheerio.load = load
+  })
 })

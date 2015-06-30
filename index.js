@@ -7,7 +7,10 @@ exports.wrap = function (cheerio) {
 
   cheerio.load = function () {
     var $ = load.apply(cheerio, arguments)
-    return exports.find.bind(null, $)
+    return function (selector, context, root) {
+      if (typeof selector === 'object') return $.apply(cheerio, arguments)
+      else return exports.find($, selector, context, root)
+    }
   }
 
   return cheerio
