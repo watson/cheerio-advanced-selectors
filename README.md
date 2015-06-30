@@ -38,9 +38,10 @@ var $ = cheerio.load('<div>foo</div><div>bar</div>')
 $('div:first').text() // => 'foo'
 ```
 
-Note that this will only work if the HTML is loaded using the `.load()`
-function as seen above (see [issue
-1](https://github.com/watson/cheerio-advanced-selectors/issues/1)).
+_**Gotcha:** The result returned from `.load()` isn't a cheerio object
+but a custom function used to wrap the cheerio-advanced-selector logic
+(see [issue
+2](https://github.com/watson/cheerio-advanced-selectors/issues/2))._
 
 ## Advanced usage
 

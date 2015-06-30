@@ -1,19 +1,33 @@
 'use strict'
 
+var util = require('util')
+
 var splitter = /^(.*?)(?:\:(eq|first|last)(?:\((\d+)\))?)(.*)/
 
-exports.wrap = function (cheerio) {
-  var load = cheerio.load
+exports.wrap = function (Cheerio) {
+  var CheerioAdv = function (selector, context, root, opts) {
+    if (!(this instanceof CheerioAdv)) return new CheerioAdv(selector, context, root, opts)
 
-  cheerio.load = function () {
-    var $ = load.apply(cheerio, arguments)
+    if (typeof selector === 'string' && splitter.test(selector)) {
+      var steps = split(selector)
+      var cursor = Cheerio(steps.shift(), context, root, opts)
+      return execSteps(cursor, steps)
+    }
+
+    return Cheerio.apply(Cheerio, arguments)
+  }
+
+  util.inherits(CheerioAdv, Cheerio)
+
+  CheerioAdv.load = function () {
+    var $ = Cheerio.load.apply(Cheerio, arguments)
     return function (selector, context, root) {
       if (typeof selector === 'string') return exports.find($, selector, context, root)
-      return $.apply(cheerio, arguments)
+      return $.apply(Cheerio, arguments)
     }
   }
 
-  return cheerio
+  return CheerioAdv
 }
 
 exports.find = function ($, selector, context, root) {

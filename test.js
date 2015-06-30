@@ -93,14 +93,12 @@ test('#find()', function (t) {
   })
 })
 
-test('#wrap()', function (t) {
+test('#wrap() -> #load()', function (t) {
   testCases.forEach(function (testCase) {
     t.test(testCase[0], function (t) {
-      var load = cheerio.load
       var wrapped = cheerioAdv.wrap(cheerio)
       var $ = wrapped.load(testCase[1])
       t.equal($(testCase[2]).text(), testCase[3])
-      cheerio.load = load
       t.end()
     })
   })
@@ -108,7 +106,6 @@ test('#wrap()', function (t) {
   t.test('this as selector', function (t) {
     t.plan(2)
 
-    var load = cheerio.load
     var wrapped = cheerioAdv.wrap(cheerio)
     var $ = wrapped.load('<div>foo</div><div>bar</div>')
     var results = ['foo', 'bar']
@@ -116,7 +113,27 @@ test('#wrap()', function (t) {
     $('div').each(function () {
       t.equal($(this).text(), results.shift())
     })
+  })
+})
 
-    cheerio.load = load
+test('#wrap() -> #()', function (t) {
+  testCases.forEach(function (testCase) {
+    t.test(testCase[0], function (t) {
+      var wrapped = cheerioAdv.wrap(cheerio)
+      t.equal(wrapped(testCase[2], testCase[1]).text(), testCase[3])
+      t.end()
+    })
+  })
+
+  t.test('this as selector', function (t) {
+    t.plan(2)
+
+    var wrapped = cheerioAdv.wrap(cheerio)
+    var html = '<div>foo</div><div>bar</div>'
+    var results = ['foo', 'bar']
+
+    wrapped('div', html).each(function () {
+      t.equal(wrapped(this).text(), results.shift())
+    })
   })
 })
