@@ -17,6 +17,7 @@
   },
   "keywords": [
     "cheerio",
+    "css",
     "jquery",
     "query",
     "queries",
@@ -25,7 +26,10 @@
     "find",
     "last",
     "first",
-    "eq"
+    "eq",
+    "scraping",
+    "scraper",
+    "scrape"
   ],
   "author": "Thomas Watson Steen <w@tson.dk> (https://twitter.com/wa7son)",
   "license": "MIT",
