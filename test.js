@@ -66,6 +66,8 @@ var testCases = [
   ['Non-advanced selector', '<div>foo</div><div>bar</div>', 'div', 'foobar'],
   ['Simple selector ending in :first()', '<div>foo</div><div>bar</div>', 'div:first', 'foo'],
   ['Simple selector ending in :last()', '<div>foo</div><div>bar</div>', 'div:last', 'bar'],
+  ['Simple selector ending in :first-child()', '<div><span>foo</span><span>bar</span></div>', 'div span:first-child', 'foo'],
+  ['Simple selector ending in :last-child()', '<div><span>foo</span><span>bar</span></div>', 'div span:last-child', 'bar'],
   ['Simple selector ending in :eq()', '<div>foo</div><div>bar</div>', 'div:eq(1)', 'bar'],
   ['Simple selector with :eq() in the middle', '<div><span>foo</span></div><div><span>bar</span></div>', 'div:eq(0) span', 'foo'],
   ['Complex selector', '<div><span><h1>foo</h1></span><span><h1>bar</h1></span></div>', 'div:first span:eq(1) h1', 'bar']
