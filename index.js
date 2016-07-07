@@ -2,7 +2,7 @@
 
 var util = require('util')
 
-var splitter = /^(.*?)(?:\:(eq|first|last)(?:\((\d+)\))?)(.*)/
+var splitter = /^(.*?)(?:\:(eq|(?:(?:first|last)(?!-child)))(?:\((\d+)\))?)(.*)/
 
 exports.wrap = function (Cheerio) {
   var CheerioAdv = function (selector, context, root, opts) {
