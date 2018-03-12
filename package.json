@@ -1,6 +1,6 @@
 {
   "name": "cheerio-advanced-selectors",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Add advanced selector support to cheerio",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/watson/cheerio-advanced-selectors",
   "coordinates": [
-    55.6877308,
-    12.595615
+    55.7776813,
+    12.5814658
   ]
 }
