@@ -4,7 +4,7 @@
   "description": "Add advanced selector support to cheerio",
   "main": "index.js",
   "scripts": {
-    "test": "standard && tape test.js"
+    "test": "standard && ./node_modules/.bin/tav cheerio '>=0.18.0 || ^1.0.0-rc' -- node test.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,8 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "standard": "^11.0.0",
-    "tape": "^4.9.0"
+    "tape": "^4.9.0",
+    "test-all-versions": "^3.3.2"
   },
   "keywords": [
     "cheerio",
