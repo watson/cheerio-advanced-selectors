@@ -40,11 +40,6 @@ var $ = cheerio.load('<div>foo</div><div>bar</div>')
 $('div:first').text() // => 'foo'
 ```
 
-_**Gotcha:** The result returned from `.load()` isn't a cheerio object
-but a custom function used to wrap the cheerio-advanced-selector logic
-(see [issue
-2](https://github.com/watson/cheerio-advanced-selectors/issues/2))._
-
 ## Advanced usage
 
 Alternatively use the `.find()` function to only use
