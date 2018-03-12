@@ -16,6 +16,8 @@ This module is inspired by
 [cheerio-eq](https://github.com/watson/cheerio-eq) with the added
 support for many different selectors.
 
+Supports cheerio version 0.18.0 and above.
+
 ## Installation
 
 ```
