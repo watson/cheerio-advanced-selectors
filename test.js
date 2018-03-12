@@ -95,6 +95,26 @@ test('#find()', function (t) {
   })
 })
 
+test('#wrap() -> call static cheerio function', function (t) {
+  var html = '<div>foo</div><div>bar</div>'
+  var $ = cheerio.load(html)
+  var $adv = cheerioAdv.wrap(cheerio).load(html)
+
+  t.equal($.html(), html)
+  t.equal($adv.html(), html)
+  t.end()
+})
+
+test('#wrap() -> call prototype cheerio function', function (t) {
+  var html = '<div>foo</div><div>bar</div>'
+  var $ = cheerio.load(html)
+  var $adv = cheerioAdv.wrap(cheerio).load(html)
+
+  t.equal(typeof $('div').splice, 'function')
+  t.equal(typeof $adv('div').splice, 'function')
+  t.end()
+})
+
 test('#wrap() -> #load()', function (t) {
   testCases.forEach(function (testCase) {
     t.test(testCase[0], function (t) {

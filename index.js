@@ -21,10 +21,17 @@ exports.wrap = function (Cheerio) {
 
   CheerioAdv.load = function () {
     var $ = Cheerio.load.apply(Cheerio, arguments)
-    return function (selector, context, root) {
+
+    function AdvInitialize (selector, context, root) {
       if (typeof selector === 'string') return exports.find($, selector, context, root)
       return $.apply(Cheerio, arguments)
     }
+
+    Object.keys($).forEach(function (key) {
+      AdvInitialize[key] = $[key]
+    })
+
+    return AdvInitialize
   }
 
   return CheerioAdv
