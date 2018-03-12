@@ -100,8 +100,8 @@ test('#wrap() -> call static cheerio function', function (t) {
   var $ = cheerio.load(html)
   var $adv = cheerioAdv.wrap(cheerio).load(html)
 
-  t.equal($.html(), html)
-  t.equal($adv.html(), html)
+  t.equal($.text(), 'foobar')
+  t.equal($adv.text(), 'foobar')
   t.end()
 })
 
