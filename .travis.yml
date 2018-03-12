@@ -1,8 +1,14 @@
 language: node_js
 node_js:
+- '9'
+- '8'
+- '7'
+- '6'
+- '5'
+- '4'
+- 'iojs'
 - '0.12'
 - '0.10'
 - '0.8'
-- 'iojs'
 before_install:
-- npm install -g npm@~1.4.6
+- 'if [ "${TRAVIS_NODE_VERSION}" == "0.8" ]; then npm install -g npm@~1.4.6; fi'
