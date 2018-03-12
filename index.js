@@ -5,7 +5,7 @@ var util = require('util')
 var splitter = /^(.*?)(?::(eq|(?:(?:first|last)(?!-child)))(?:\((\d+)\))?)(.*)/
 
 exports.wrap = function (Cheerio) {
-  var CheerioAdv = function (selector, context, root, opts) {
+  function CheerioAdv (selector, context, root, opts) {
     if (!(this instanceof CheerioAdv)) return new CheerioAdv(selector, context, root, opts)
 
     if (typeof selector === 'string' && splitter.test(selector)) {
